@@ -1,4 +1,3 @@
-hexo clean
 hexo generate #生成静态整站
 cd ./public #生成的静态页面会存储在public目录下
 git init
