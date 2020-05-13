@@ -12,7 +12,7 @@ before_install:
 install:
 - npm install # 安装package.json文件中配置的hexo插件
 script:
-  - hexo c # generate static files
+  # - hexo c # generate static files
   - hexo generate # generate static files
 after_script:
   - cd ./public
