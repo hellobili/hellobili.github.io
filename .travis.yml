@@ -8,9 +8,9 @@ before_install:
 - npm install --save hexo-deployer-git # hexo deploy插件
 install:
 - npm install # 安装package.json文件中配置的hexo插件
-before_script:
-  - npm install -g mocha
-  - git clone --branch master https://github.com/Longxr/Longxr.github.io.git public
+# before_script:
+#   - npm install -g mocha
+#   - git clone --branch master https://github.com/Longxr/Longxr.github.io.git public
 script:
   - hexo cl && hexo g
 after_script:
