@@ -1,0 +1,18 @@
+sudo: false
+language: node_js
+node_js:
+  - 10 # use nodejs v10 LTS
+cache: npm
+branches:
+  only:
+    - source # build source branch only
+before_install: 
+- npm install -g hexo-cli # hexo环境
+- npm install --save hexo-deployer-git # hexo deploy插件
+install:
+- npm install # 安装package.json文件中配置的hexo插件
+# script:
+  # - hexo generate # generate static files
+script:
+  - chmod +x ./build.sh
+  - ./build.sh > /dev/null
