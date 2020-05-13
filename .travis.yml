@@ -3,9 +3,6 @@ language: node_js
 node_js:
   - 10 # use nodejs v10 LTS
 cache: npm
-branches:
-  only:
-    - source # build source branch only
 before_install: 
 - npm install -g hexo-cli # hexo环境
 - npm install --save hexo-deployer-git # hexo deploy插件
@@ -24,6 +21,9 @@ after_script:
   - git add .
   - git commit -m "update by Travis-CI"
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master #GH_token就是在travis中设置的token
+branches:
+  only:
+    - source # build source branch only
 env:
     global:
         - GH_REF: github.com/hellobili/hellobili.github.io.git
