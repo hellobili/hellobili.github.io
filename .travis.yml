@@ -14,9 +14,6 @@ install:
 script:
   - hexo c # generate static files
   - hexo generate # generate static files
-# script:
-#   - chmod +x ./build.sh
-#   - ./build.sh > /dev/null
 after_script:
   - cd ./public
   - git init
