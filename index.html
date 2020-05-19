@@ -34,9 +34,9 @@
     </div>
     <div class="header-menu">
       
-        <a href="/">Home</a>
+        <a href="/heilobili/">Home</a>
       
-        <a href="/archives">Archives</a>
+        <a href="/heilobili/archives">Archives</a>
       
     </div>
     
@@ -56,9 +56,9 @@
         </div>
         <div class="header-menu-mobile-menu-list">
           
-            <a href="/">Home</a>
+            <a href="/heilobili/">Home</a>
           
-            <a href="/archives">Archives</a>
+            <a href="/heilobili/archives">Archives</a>
           
         </div>
       </div>
@@ -84,16 +84,44 @@
 
     <div class="article-body">
       <header class="article-title">
-        <a href="/2020/05/13/gitPages-hexo-travis/">gitPages-hexo-travis</a>
+        <a href="/heilobili/2020/05/13/gitPages-hexo-travis/">gitPages-hexo-travis</a>
       </header>
       <div class="article-entry post-inner-html">
         
           <h3 id="前提操作"><a href="#前提操作" class="headerlink" title="前提操作"></a>前提操作</h3><p>1.注册github账号<br>2.创建 <code>&lt;你的 GitHub 用户名&gt;.github.io</code> 仓库<br>3.全局安装 <code>hexo</code> <code>npm install -g hexo-cli</code><br>4.运行 <code>hexo init &lt;文件名&gt;</code> , <code>cd &lt;文件名&gt;</code><br>5.运行 <code>hexo s</code> 启动服务，查看是否正常<br>6.运行 <code>hexo g</code> 生成静态文件<br>7.推送到 <code>github</code> 仓库，这里需要配置仓库地址和分支<br>打开 <code>_config.yml</code> 文件，修改</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">    <span class="attr">repo:</span> <span class="string">你的github地址</span> <span class="string">（例如：git@github.com:hellobili/hellobili.github.io.git）</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<pre><code class="yml">    deploy:
+        type: git
+        repo: 你的github地址 （例如：git@github.com:hellobili/hellobili.github.io.git）
+        branch: master</code></pre>
 <p>ps：使用 <code>&lt;你的 GitHub 用户名&gt;.github.io</code> 格式命名的仓库，html文件会自动部署到 <code>master</code> 上，所以生成的文件应该放在 <code>master</code> 分支上<br>配置好后，需要安装 <code>hexo-deployer-git</code> 才能部署到 <code>github</code> 上， 运行： <code>npm install hexo-deployer-git --save</code><br>安装好插件后， 运行： <code>hexo d</code> 部署</p>
 <p>8.初始化<code>git</code><br>   a.初始化 <code>git</code>： <code>git init</code><br>   b.关联仓库 <code>git remote add origin 仓库地址</code> （origin 为仓库别名 ，可自定义）, 先提交初始化内容 <code>git add .</code>, <code>git commit -m &#39;init&#39;</code><br>   c.<code>master</code> 分支为静态文件分支， 先创建一个源文件分支 (我这里为 <code>source</code> ) <code>git checkout -b source</code><br>   d.推送到仓库 <code>git push -u origin source</code><br>这里源码已经推送到仓库， 接下来配置自动化部署<br>9.自动化部署配置 <code>Travis CI</code><br>    a.注册 <a href="https://travis-ci.com/" target="_blank" rel="noopener"><code>Travis CI</code></a> 账号, 使用 <code>github</code> 账号登录<br>    b.添加需要自动化的仓库,你可以在左上角找到My Repositories一旁的加号“+”，点击它，它就会列出你所有的仓库，你只需要找到刚才的 hexo.github.io 并把它左侧的开关打开就可以了。<br>    c.新建一个<code>Token</code>，前往 <code>GitHub</code> 新建 <code>Personal Access Token</code>，只勾选 <code>repo</code> 的权限并生成一个新的 <code>Token</code>。<code>Token</code> 生成后请复制并保存好。<br>    d.回到 <code>Travis CI</code>，前往你的 <code>repository</code> 的设置页面，在 <code>Environment Variables</code> 下新建一个环境变量，<code>Name</code> 为 <code>GH_TOKEN</code>，<code>Value</code> 为刚才你在 <code>GitHub</code> 生成的 <code>Token</code>。确保 <code>DISPLAY VALUE IN BUILD LOG</code> 保持 不被勾选 避免你的 Token 泄漏。点击 <code>Add</code> 保存。<br>    e.在你的 <code>Hexo</code> 站点文件夹中新建一个 <code>.travis.yml</code> 文件：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line"><span class="bullet">-</span> <span class="number">10</span> <span class="comment"># use nodejs v10 LTS</span></span><br><span class="line"><span class="attr">cache:</span> <span class="string">npm</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line"><span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">source</span> <span class="comment"># build source branch only</span></span><br><span class="line"><span class="attr">before_install:</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">hexo-cli</span> <span class="comment"># hexo环境</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">--save</span> <span class="string">hexo-deployer-git</span> <span class="comment"># hexo deploy插件</span></span><br><span class="line"><span class="attr">install:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span> <span class="comment"># 安装package.json文件中配置的hexo插件</span></span><br><span class="line"><span class="comment"># script:</span></span><br><span class="line"><span class="comment"># - hexo generate # generate static files</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">chmod</span> <span class="string">+x</span> <span class="string">./build.sh</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">./build.sh</span> <span class="string">&gt;</span> <span class="string">/dev/null</span></span><br></pre></td></tr></table></figure>
-<pre><code>我把脚本写在 `build.sh` 文件里面：</code></pre><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hexo generate <span class="comment">#生成静态整站</span></span><br><span class="line"><span class="built_in">cd</span> ./public <span class="comment">#生成的静态页面会存储在public目录下</span></span><br><span class="line">git init</span><br><span class="line">git config --global push.default matching</span><br><span class="line">git config --global user.email <span class="string">"你的github邮箱"</span> <span class="comment"># 修改为自己的github邮箱</span></span><br><span class="line">git config --global user.name <span class="string">"你的github用户名"</span> <span class="comment"># 修改为自己的github用户名</span></span><br><span class="line">git add --all .</span><br><span class="line">git commit -m <span class="string">"Travis CI Auto Builder"</span> <span class="comment">#自动构建后的内容将全部以此信息提交</span></span><br><span class="line">git push --quiet --force https://<span class="variable">$&#123;GH_TOKEN&#125;</span>@github.com/用户名/仓库名.git master  <span class="comment">#自动构建后的内容将全部以此信息提交 需要修改用户名</span></span><br></pre></td></tr></table></figure>
+<pre><code class="yml">    sudo: false
+    language: node_js
+    node_js:
+    - 10 # use nodejs v10 LTS
+    cache: npm
+    branches:
+    only:
+        - source # build source branch only
+    before_install: 
+    - npm install -g hexo-cli # hexo环境
+    - npm install --save hexo-deployer-git # hexo deploy插件
+    install:
+    - npm install # 安装package.json文件中配置的hexo插件
+    # script:
+    # - hexo generate # generate static files
+    script:
+    - chmod +x ./build.sh
+    - ./build.sh &gt; /dev/null</code></pre>
+<pre><code>我把脚本写在 `build.sh` 文件里面：</code></pre><pre><code class="sh">hexo generate #生成静态整站
+cd ./public #生成的静态页面会存储在public目录下
+git init
+git config --global push.default matching
+git config --global user.email &quot;你的github邮箱&quot; # 修改为自己的github邮箱
+git config --global user.name &quot;你的github用户名&quot; # 修改为自己的github用户名
+git add --all .
+git commit -m &quot;Travis CI Auto Builder&quot; #自动构建后的内容将全部以此信息提交
+git push --quiet --force https://${GH_TOKEN}@github.com/用户名/仓库名.git master  #自动构建后的内容将全部以此信息提交 需要修改用户名</code></pre>
 <p>创建完成后，把文件推送到仓库 <code>sources</code> 分支下，<code>Travis CI</code> 会开始开启监测 <code>source</code> 分支提交并自动部署</p>
 <p>10.测试自动部署是否成功<br><code>hexo new &#39;test&#39;</code> 创建一个新的文档<br><code>git add .</code>, <code>git commit -m &#39;test&#39;</code><br><code>git push origin source</code><br><code>git</code> 远程提交一次，查看 <code>Travis CI</code> 是否开始部署，并部署正常。前往 <code>https://&lt;你的 GitHub 用户名&gt;.github.io</code> 查看你的站点是否可以访问。这可能需要一些时间</p>
 <blockquote>
@@ -108,93 +136,8 @@
 
   <footer class="article-footer">
     <div class="article-more-info">
-      <a href="/2020/05/13/gitPages-hexo-travis/" class="article-date">
+      <a href="/heilobili/2020/05/13/gitPages-hexo-travis/" class="article-date">
   <time datetime="2020-05-13T06:00:13.000Z" itemprop="datePublished">2020-05-13</time>
-</a>
-      
-      
-    </div>
-  </footer>
-
-
-</article>
-
-  
-    <article
-  id="post-test"
-  class="article article-type-post"
->
-
-  <div class="article-inner">
-
-    
-
-    <div class="article-body">
-      <header class="article-title">
-        <a href="/2020/05/13/test/">test</a>
-      </header>
-      <div class="article-entry post-inner-html">
-        
-          
-        
-      </div>
-    </div>
-
-  </div>
-
-  <footer class="article-footer">
-    <div class="article-more-info">
-      <a href="/2020/05/13/test/" class="article-date">
-  <time datetime="2020-05-13T05:56:17.000Z" itemprop="datePublished">2020-05-13</time>
-</a>
-      
-      
-    </div>
-  </footer>
-
-
-</article>
-
-  
-    <article
-  id="post-hello-world"
-  class="article article-type-post"
->
-
-  <div class="article-inner">
-
-    
-
-    <div class="article-body">
-      <header class="article-title">
-        <a href="/2020/05/13/hello-world/">Hello World</a>
-      </header>
-      <div class="article-entry post-inner-html">
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        
-      </div>
-    </div>
-
-  </div>
-
-  <footer class="article-footer">
-    <div class="article-more-info">
-      <a href="/2020/05/13/hello-world/" class="article-date">
-  <time datetime="2020-05-13T03:54:02.099Z" itemprop="datePublished">2020-05-13</time>
 </a>
       
       
@@ -230,15 +173,7 @@
       <ul>
         
           <li>
-            <a href="/2020/05/13/gitPages-hexo-travis/">gitPages-hexo-travis</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/13/test/">test</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/13/hello-world/">Hello World</a>
+            <a href="/heilobili/2020/05/13/gitPages-hexo-travis/">gitPages-hexo-travis</a>
           </li>
         
       </ul>
@@ -250,7 +185,7 @@
   <div class="widget-wrap widget-archive">
     <div class="widget-title"><span>Archive</span></div>
     <div class="widget-inner">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/heilobili/archives/2020/">2020</a></li></ul>
     </div>
   </div>
 
@@ -294,10 +229,10 @@
 </footer>
 
 
-<script src="/dist/build.js?1.0.1.js"></script>
+<script src="/heilobili/dist/build.js?1.0.1.js"></script>
 
 
-<script src="/dist/custom.js?1.0.1.js"></script>
+<script src="/heilobili/dist/custom.js?1.0.1.js"></script>
 
 
 
