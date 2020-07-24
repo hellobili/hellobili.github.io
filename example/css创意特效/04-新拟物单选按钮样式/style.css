@@ -1,0 +1,62 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: '微软雅黑', sans-serif;
+}
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #091921;
+}
+.container{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container p{
+  color: #fff;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.container label{
+  position: relative;
+  cursor: pointer;
+}
+.container label input{
+  appearance: none;
+}
+.container label .iconfont{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background: #091921;
+  line-height: 40px;
+  margin: 0 4px;
+  color: #6f6f6f;
+  font-size: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1),
+              2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.container label .iconfont:hover{
+  box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1),
+              2px 2px 6px rgba(0, 0, 0, 0.8),
+              inset -2px -2px 10px rgba(255, 255, 255, 0.05),
+              inset 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+.container label input:checked ~ .iconfont{
+  color: #00fff1;
+  box-shadow: inset -1px -1px 3px rgba(255, 255, 255, 0.1),
+              inset 2px 2px 6px rgba(0, 0, 0, 1);
+  /* text-shadow: 0 0 5px #00fff1,
+              0, 0 20px #00fff1; */
+}
