@@ -1,0 +1,62 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: '微软雅黑', sans-serif;
+}
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #9fc5d5;
+}
+.container{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container p{
+  color: #2d2e2f;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.container label{
+  position: relative;
+  cursor: pointer;
+}
+.container label input{
+  appearance: none;
+}
+.container label .iconfont{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(145deg, #aad3e4, #8fb1c0);;
+  line-height: 40px;
+  margin: 0 4px;
+  color: #6f6f6f;
+  font-size: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  box-shadow: 4px 4px 8px #7e9ca8, 
+              -4px -4px 8px #c0eeff;
+}
+
+.container label .iconfont:hover{
+  background: linear-gradient(145deg, #8fb1c0, #aad3e4);
+  box-shadow: 4px 4px 8px #7e9ca8, 
+              -4px -4px 8px #c0eeff;
+}
+.container label input:checked ~ .iconfont{
+  color: #03141c;
+  background: #9fc5d5;
+  box-shadow: inset 4px 4px 8px #7e9ca8, 
+              inset -4px -4px 8px #c0eeff;
+  /* text-shadow: 0 0 5px #00fff1,
+              0, 0 20px #00fff1; */
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href='./style.css' rel="stylesheet" />
+  <title>05-全屏视频背景滚动淡出</title>
+</head>
+<body>
+  <section>
+    <video src=" https://klxxcdn.oss-cn-hangzhou.aliyuncs.com/histudy/hrm/media/bg3.mp4" muted autoplay loop></video>
+  </section>
+  <section>
+    <div class="content">
+      <h2>以劳动书写人生风采</h2>
+      <p>
+        中华民族是一个热爱劳动的民族，劳动精神自古以来就流淌在中国人民的血脉之中，去不掉、打不破、灭不了。“幸福是奋斗出来的”，个人追求的实现，离不开不懈奋斗劳动;家国复兴的使命，也只有靠劳动来成就。
+
+      此处省略了很多字...................................
+      </p>
+    </div>
+  </section>
+  <script>
+    let video = document.querySelector('video')
+    window.addEventListener('scroll', function() {
+      let value = 1 + window.scrollY / -600
+      video.style.opacity = value
+    })
+  </script>
+</body>
+</html>
