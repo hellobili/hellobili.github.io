@@ -21,12 +21,18 @@ UI 组件库
 - [网页设计常用色彩搭配表](http://tool.c7sky.com/webcolor/)
 - [uiGradients](https://uigradients.com/#Flare)
 - [colorhunt](https://colorhunt.co/)
+- [中国色](http://zhongguose.com/)
+- [Adobe Color](https://color.adobe.com/zh/)
+
+### 字体
+
 
 ### 其他
 - [Awesomes](https://www.awesomes.cn/) -- Web前端开发资源库
 
 ## 社区
 - [掘金](https://juejin.im/)
+- [少数派](https://sspai.com/)
 
 ## 学习
 - [freeCodeCamp](https://www.freecodecamp.org/) -- Learn to code at home.
